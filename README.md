@@ -82,7 +82,7 @@ interview-prep-ai/
         │   ├── auth/
         │   └── interview/
         └── style/
-
+```
 ## Prerequisites
 
 Before running the app, make sure you have:
