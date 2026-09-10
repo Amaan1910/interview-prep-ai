@@ -144,20 +144,7 @@ async function generatePdfFromHtml(htmlContent) {
 }
 
 async function generateResumePdf({ resume, selfDescription, jobDescription }) {
-    const resumePdfJsonSchema = {
-        type: "object",
-        properties: {
-            html: {
-                type: "string",
-                description: "The HTML content of the resume which can be converted to PDF using any library like Puppeteer"
-            }
-        },
-        required: ["html"]
-    }
-
-    const resumePdfSchema = z.fromJSONSchema(resumePdfJsonSchema);
-
-    const prompt = `Generate a professional resume in JSON object with a single field 'html' which contains the HTML content for the resume.
+    const prompt = `Generate a professional resume as a complete, standalone HTML document (including a <style> block for formatting).
         ${resume ? `Resume: ${resume}` : ""}
         ${selfDescription ? `Self-Description: ${selfDescription}` : ""}
         ${jobDescription ? `Job-Description: ${jobDescription}` : ""}
@@ -171,22 +158,21 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         const interaction = await ai.interactions.create({
             model: "gemini-3.6-flash",
             input: prompt,
-            response_format: {
-                type: 'text',
-                mime_type: 'application/json',
-                schema: resumePdfJsonSchema
-            },
+            response_format: { type: 'text' },
         });
-        const report = resumePdfSchema.parse(JSON.parse(interaction.output_text));
-        const pdfBuffer = await generatePdfFromHtml(report.html);
-        return pdfBuffer;
 
+        let html = interaction.output_text.trim();
+        html = html.replace(/^```html\s*/i, '').replace(/```$/,'').trim();
+
+        const pdfBuffer = await generatePdfFromHtml(html);
+        return pdfBuffer;
     } catch (err) {
+        console.error('Gemini API error:', JSON.stringify(err, null, 2));
         if (err.status === 400 && err.error?.error?.message?.includes('copyright')) {
             throw new Error('COPYRIGHT_FILTER_TRIGGERED');
         }
         throw err;
-    } 
+    }
 }
 
 module.exports = { generateInterviewReport, generateResumePdf };
