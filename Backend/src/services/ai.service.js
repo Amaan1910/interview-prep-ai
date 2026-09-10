@@ -168,10 +168,11 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         return pdfBuffer;
     } catch (err) {
         console.error('Gemini API error:', JSON.stringify(err, null, 2));
-        if (err.status === 400 && err.error?.error?.message?.includes('copyright')) {
-            throw new Error('COPYRIGHT_FILTER_TRIGGERED');
+        if (err.response?.status === 429) {
+            setError("We're experiencing high demand right now. Please try again in a few minutes.")
+        } else {
+            setError("Something went wrong while generating your resume PDF. Please try again.")
         }
-        throw err;
     }
 }
 
