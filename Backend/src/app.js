@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     // origin: "http://localhost:5173", For local development
-    origin: "https://interview-prep-ai-75kx.vercel.app/",
+    origin: "https://interview-prep-ai-75kx.vercel.app",
     credentials: true
 }))
 
