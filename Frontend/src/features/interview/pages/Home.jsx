@@ -121,7 +121,7 @@ const Home = () => {
                 <label className="file-dropzone" htmlFor="resume">
                   <span className="file-dropzone__icon" aria-hidden="true" />
                   <strong>Click to upload or drag &amp; drop</strong>
-                  <small>PDF or DOCX (Max 5MB)</small>
+                  <small>PDF (Max 5MB)</small>
                 </label>
               )}
               <input
@@ -130,7 +130,7 @@ const Home = () => {
                 type="file"
                 id="resume"
                 name="resume"
-                accept=".pdf,.docx"
+                accept=".pdf"
                 onChange={handleResumeChange}
               />
             </div>
