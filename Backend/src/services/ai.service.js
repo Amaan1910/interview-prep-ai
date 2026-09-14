@@ -169,9 +169,9 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
     } catch (err) {
         console.error('Gemini API error:', JSON.stringify(err, null, 2));
         if (err.response?.status === 429) {
-            setError("We're experiencing high demand right now. Please try again in a few minutes.")
+            console.error("We're experiencing high demand right now. Please try again in a few minutes.")
         } else {
-            setError("Something went wrong while generating your resume PDF. Please try again.")
+            console.error("Something went wrong while generating your resume PDF. Please try again.")
         }
     }
 }
