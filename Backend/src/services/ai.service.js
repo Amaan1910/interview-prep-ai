@@ -129,7 +129,7 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
 async function generatePdfFromHtml(htmlContent) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    await page.setContent(htmlContent, { waitUntil: 'domcontentloaded', timeout: 60000 });
     const pdfBuffer = await page.pdf({ 
         format: 'A4',
         margin: {
@@ -152,7 +152,8 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         You can highlight the skills and experience of the candidate in a way that is visually appealing and easy to read. Use bullet points, headings, and other formatting techniques to make the resume stand out. The resume should be tailored to the job description provided, emphasizing the most relevant skills and experiences.
         You can highlight the content using some colors or different font styles, but make sure it looks professional and not too flashy. The resume should be concise and to the point, focusing on the most important information that will help the candidate stand out to potential employers.
         The content should be ATS friendly, meaning it should be easily readable by applicant tracking systems. Avoid using images or graphics that may not be parsed correctly by ATS software. The resume should be optimized for both human readers and ATS systems, ensuring that the candidate's qualifications are effectively communicated to potential employers.
-        The resume should not be so lengthy that it becomes overwhelming or difficult to read. It should be ideally 1-2 pages long. Focus on the most important information and present it in a clear and organized manner. The resume should be tailored to the specific job description provided, highlighting the skills and experiences that are most relevant to the position.`
+        The resume should not be so lengthy that it becomes overwhelming or difficult to read. It should be ideally 1-2 pages long. Focus on the most important information and present it in a clear and organized manner. The resume should be tailored to the specific job description provided, highlighting the skills and experiences that are most relevant to the position.
+        The HTML must be fully self-contained: no external stylesheets, fonts, scripts, images, or CDN links (e.g. no Google Fonts <link> tags). Use only inline <style>, system fonts (e.g. Arial, Helvetica, Georgia), and text-based content — nothing that requires a network request to render.`
 
     try {
         const interaction = await ai.interactions.create({
