@@ -167,7 +167,7 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         const pdfBuffer = await generatePdfFromHtml(html);
         return pdfBuffer;
     } catch (err) {
-        console.error('Gemini API error:', JSON.stringify(err, null, 2));
+        console.error('Gemini API error:', err);
         if (err.response?.status === 429) {
             console.error("We're experiencing high demand right now. Please try again in a few minutes.")
         } else {
