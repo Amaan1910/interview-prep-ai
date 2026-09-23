@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import "../style/interview.scss"
+import "../style/loadingstate.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
+import LoadingState from '../loader/Loadingstate.jsx'
 
 const NAV_ITEMS = [
   { id: 'technical', label: 'Technical Questions' },
@@ -109,7 +111,7 @@ const Interview = () => {
   if (loading) {
     return (
       <main className="interview">
-        <h1>Loading your interview plan...</h1>
+        <LoadingState messages={['Loading your interview plan...']} />
       </main>
     )
   }
