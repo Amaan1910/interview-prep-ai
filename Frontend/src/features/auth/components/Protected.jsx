@@ -1,11 +1,12 @@
 import { Navigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
+import LoadingState from '../../interview/loader/Loadingstate'
 
 const Protected = ({ children }) => {
     const { loading, user } = useAuth()
 
     if (loading) {
-        return (<main><h1>Loading...</h1></main>)
+        return (<main><LoadingState messages={['Loading...']} /></main>)
     }
 
     if(!user) {

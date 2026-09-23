@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 import { useState } from 'react'
+import LoadingState from '../../interview/loader/Loadingstate'
 
 const Register = () => {
 
@@ -18,7 +19,7 @@ const Register = () => {
     }
 
     if (loading) {
-        return(<main><h1>Loading...</h1></main>)
+        return(<main><LoadingState messages={['Loading...']} /></main>)
     }
 
   return (
