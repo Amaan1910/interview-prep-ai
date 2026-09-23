@@ -13,7 +13,7 @@ const formatFileSize = (bytes) => {
 
 const Home = () => {
 
-    const { loading, generateReport, reports } = useInterview()
+    const { loading, generating, generateReport, reports } = useInterview()
     const [ jobDescription, setJobDescription ] = useState("")
     const [ selfDescription, setSelfDescription ] = useState("")
     const navigate = useNavigate()
@@ -39,6 +39,10 @@ const Home = () => {
     }
 
     if (loading) {
+        return(<main><LoadingState messages={['Loading...']} /></main>)
+    }
+
+    if (generating) {
         return(<main><LoadingState /></main>)
     }
 
