@@ -8,7 +8,7 @@ const DEFAULT_MESSAGES = [
   'Almost ready...',
 ]
 
-const LoadingState = ({ messages = DEFAULT_MESSAGES, intervalMs = 2500 }) => {
+const LoadingState = ({ messages = DEFAULT_MESSAGES, intervalMs = 6000 }) => {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
