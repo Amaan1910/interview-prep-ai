@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react'
 import "../style/home.scss"
-import "../style/loadingstate.scss"
 import LoadingState from '../loader/Loadingstate.jsx'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import "../style/interview.scss"
-import "../style/loadingstate.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
 import LoadingState from '../loader/Loadingstate.jsx'

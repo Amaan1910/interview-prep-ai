@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './loading-state.scss'
+import "../style/loadingstate.scss"
 
 const DEFAULT_MESSAGES = [
   'Reading your resume...',
